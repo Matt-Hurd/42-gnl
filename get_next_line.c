@@ -6,7 +6,7 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 21:30:44 by mhurd             #+#    #+#             */
-/*   Updated: 2016/09/23 02:49:21 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/09/23 14:25:03 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 void	handle_extra(char *extra, char *ret, char **end)
 {
 	long	dist;
+	char	*loc;
 
-	dist = ft_strchr(extra, '\n') - extra;
-	if (ft_strchr(extra, '\n'))
+	loc = ft_strchr(extra, '\n');
+	if (loc)
 	{
+		dist = (long)(loc - extra);
 		*end = (char *)1;
 		extra[dist] = 0;
 		ft_strcpy(ret, extra);
@@ -35,17 +37,19 @@ void	handle_extra(char *extra, char *ret, char **end)
 char	*handle_data(int count, char **ret, char *buff, char extra[BUFF_SIZE])
 {
 	long	dist;
+	char	*loc;
 	int		len;
 
 	len = ft_strlen(*ret);
-	dist = (long)(ft_strchr(buff, '\n') - buff);
-	if (!ft_strchr(buff, '\n'))
+	loc = ft_strchr(buff, '\n');
+	if (!loc)
 	{
 		*ret = (char *)ft_realloc((void *)*ret, len, len + count + 1);
 		ft_strncat(*ret, buff, count);
 	}
 	else
 	{
+		dist = (long)(loc - buff);
 		*ret = (char *)ft_realloc((void *)*ret, len, len + dist + 1);
 		ft_strncat(*ret, buff, dist);
 		ft_strncpy(extra, buff + dist + 1, BUFF_SIZE - dist - 1);
