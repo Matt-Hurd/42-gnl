@@ -65,14 +65,14 @@ int		get_next_line(const int fd, char **line)
 	int			count;
 	char		*end;
 
+	if (!line || !*line)
+		return (-1);
 	buffer = ft_strnew(BUFF_SIZE);
 	ret = ft_strnew(BUFF_SIZE);
 	end = 0;
 	handle_extra(extra, ret, &end);
 	while (!end && (count = read(fd, buffer, BUFF_SIZE)) > 0)
-	{
 		end = handle_data(count, &ret, buffer, extra);
-	}
 	if (end > buffer)
 		ft_strcpy(extra, end + 1);
 	*line = ret;
