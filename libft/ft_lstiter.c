@@ -16,9 +16,7 @@ void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 {
 	if (!lst || !f)
 		return ;
-	while (lst)
-	{
-		f(lst);
-		lst = lst->next;
-	}
+	f(lst);
+	if (lst->next)
+		ft_lstiter(lst->next, f);
 }

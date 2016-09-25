@@ -76,11 +76,8 @@ int		get_next_line(const int fd, char **line)
 	if (end > buffer)
 		ft_strcpy(extra, end + 1);
 	*line = ret;
-	if (end || ret[0] || buffer[0] || count)
-	{
-		ft_strdel(&buffer);
-		return ((count >= 0 ? 1 : -1));
-	}
 	ft_strdel(&buffer);
+	if (end || ret[0] || count)
+		return ((count >= 0 ? 1 : -1));
 	return (0);
 }
