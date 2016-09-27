@@ -6,14 +6,14 @@
 /*   By: mhurd <mhurd@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 21:30:44 by mhurd             #+#    #+#             */
-/*   Updated: 2016/09/23 14:25:03 by mhurd            ###   ########.fr       */
+/*   Updated: 2016/09/27 15:27:19 by mhurd            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <unistd.h>
 
-t_list	*create_node(int fd)
+static t_list	*create_node(int fd)
 {
 	t_list		*ret;
 	t_file_buff *cont;
@@ -25,7 +25,7 @@ t_list	*create_node(int fd)
 	return (ret);
 }
 
-char	*get_extra(int fd, t_list **extra_list)
+static char		*get_extra(int fd, t_list **extra_list)
 {
 	t_list *temp;
 
@@ -42,7 +42,7 @@ char	*get_extra(int fd, t_list **extra_list)
 	return (((t_file_buff *)(*extra_list)->content)->str);
 }
 
-void	handle_extra(char *extra, char *ret, char **end)
+static void		handle_extra(char *extra, char *ret, char **end)
 {
 	long	dist;
 	char	*loc;
@@ -63,7 +63,8 @@ void	handle_extra(char *extra, char *ret, char **end)
 	}
 }
 
-char	*handle_data(int count, char **ret, char *buff, char extra[BUFF_SIZE])
+static char		*handle_data(int count, char **ret, \
+		char *buff, char extra[BUFF_SIZE])
 {
 	long	dist;
 	char	*loc;
@@ -86,7 +87,7 @@ char	*handle_data(int count, char **ret, char *buff, char extra[BUFF_SIZE])
 	return (ft_strchr(buff, '\n'));
 }
 
-int		get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
 	static t_list	*extra_list;
 	char			*ret;
